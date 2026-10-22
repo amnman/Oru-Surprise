@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For Ammu ♥</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#fff3f7;--bg2:#ffd6e5;--bg3:#ffb9d2;--ink:#d81b60;--ink2:#a0305f;--bub:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#2b1021;--bg2:#3d1630;--bg3:#55193f;--ink:#ff8fb8;--ink2:#ffc0d6;--bub:#4a1a38}}
+:root[data-theme="dark"]{--bg1:#2b1021;--bg2:#3d1630;--bg3:#55193f;--ink:#ff8fb8;--ink2:#ffc0d6;--bub:#4a1a38}
+html,body{height:100%;margin:0}
+body{background:linear-gradient(160deg,var(--bg1),var(--bg2) 55%,var(--bg3));font-family:Quicksand,system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;-webkit-tap-highlight-color:transparent;user-select:none}
+canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.msg{height:150px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;opacity:0;transform:translateY(20px) scale(.8);transition:opacity .6s .5s,transform .8s cubic-bezier(.2,1.5,.4,1) .5s;pointer-events:none}
+.open .msg{opacity:1;transform:none}
+.msg small{font-weight:700;font-size:22px;color:var(--ink2);letter-spacing:.5px}
+.msg h1{margin:0;font:400 68px/1.15 Pacifico,cursive;background:linear-gradient(90deg,#ff4d88,#ff9ec0,#ff4d88);-webkit-background-clip:text;background-clip:text;color:transparent}
+.msg h1 span{font-family:system-ui,sans-serif;font-size:36px;color:#ff4d88;-webkit-text-fill-color:#ff4d88}
+.stage{position:relative;margin-top:14px}
+.heart{width:min(60vw,250px);cursor:pointer;touch-action:manipulation;animation:beat 1.6s ease-in-out infinite}
+.heart.boing{animation:boing .65s cubic-bezier(.3,1.4,.5,1)}
+.heart svg{display:block;width:100%;filter:drop-shadow(0 14px 16px rgba(224,36,94,.35))}
+@keyframes beat{0%,70%,100%{transform:scale(1)}14%{transform:scale(1.07)}28%{transform:scale(1)}42%{transform:scale(1.04)}}
+@keyframes boing{0%{transform:scale(1)}25%{transform:scale(1.3,.7)}55%{transform:scale(.8,1.25)}80%{transform:scale(1.08,.94)}100%{transform:scale(1)}}
+.eye{transform-box:fill-box;transform-origin:center;animation:blink 4s infinite}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+.hx,.hm{display:none}
+.open .eyes,.open .nm{display:none}
+.open .hx,.open .hm{display:block}
+.bubble{position:absolute;left:50%;top:-50px;background:var(--bub);color:var(--ink);padding:8px 18px;border-radius:20px;font-weight:700;font-size:17px;box-shadow:0 6px 16px rgba(216,27,96,.2);white-space:nowrap;animation:hop 1.2s ease-in-out infinite;transition:opacity .3s}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-7px;margin-left:-8px;border:8px solid transparent;border-bottom:0;border-top-color:var(--bub)}
+@keyframes hop{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-7px)}}
+.open .bubble{opacity:0;animation:none;transform:translate(-50%,0)}
+.shadow{width:min(34vw,130px);height:14px;border-radius:50%;background:rgba(224,36,94,.25);margin:12px auto 0;filter:blur(4px);animation:sh 1.6s ease-in-out infinite}
+@keyframes sh{0%,70%,100%{transform:scaleX(1)}14%{transform:scaleX(.9)}42%{transform:scaleX(.95)}}
+.hint{margin-top:22px;color:var(--ink2);font-weight:600;font-size:16px;opacity:.8}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="msg"><small>I love you,</small><h1>Ammu <span>♥</span></h1></div>
+<div class="stage">
+  <div class="bubble">tap me!</div>
+  <div class="heart" id="heart">
+    <svg viewBox="-6 -6 212 190" aria-label="Cute heart">
+      <defs><radialGradient id="g" cx=".35" cy=".28" r=".85"><stop offset="0" stop-color="#ff9fc0"/><stop offset=".55" stop-color="#ff4f8b"/><stop offset="1" stop-color="#e0245e"/></radialGradient></defs>
+      <path fill="url(#g)" d="M100 172C20 112 0 74 0 46 0 19 22 0 48 0c22 0 42 12 52 32C110 12 130 0 152 0c26 0 48 19 48 46 0 28-20 66-100 126z"/>
+      <ellipse cx="42" cy="34" rx="17" ry="9" transform="rotate(-35 42 34)" fill="#fff" opacity=".55"/>
+      <circle cx="68" cy="16" r="4" fill="#fff" opacity=".6"/>
+      <ellipse cx="46" cy="102" rx="12" ry="7" fill="#ffb0c8" opacity=".85"/>
+      <ellipse cx="154" cy="102" rx="12" ry="7" fill="#ffb0c8" opacity=".85"/>
+      <g class="eyes">
+        <g class="eye"><ellipse cx="68" cy="78" rx="7" ry="10" fill="#4a1230"/><circle cx="70.5" cy="74" r="3" fill="#fff"/></g>
+        <g class="eye"><ellipse cx="132" cy="78" rx="7" ry="10" fill="#4a1230"/><circle cx="134.5" cy="74" r="3" fill="#fff"/></g>
+      </g>
+      <path class="nm" d="M91 96Q100 106 109 96" stroke="#4a1230" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <g class="hx" fill="none" stroke="#4a1230" stroke-width="5" stroke-linecap="round"><path d="M58 83Q68 65 78 83"/><path d="M122 83Q132 65 142 83"/></g>
+      <g class="hm"><path d="M88 94Q100 117 112 94Z" fill="#b3124a"/><path d="M94 105Q100 113 106 105Q100 100 94 105Z" fill="#ff7a9f"/></g>
+    </svg>
+  </div>
+  <div class="shadow"></div>
+</div>
+<div class="hint" id="hint">tap the heart</div>
+<script>
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+let W,H;const D=Math.min(window.devicePixelRatio||1,2);
+function size(){W=innerWidth;H=innerHeight;cv.width=W*D;cv.height=H*D;ctx.setTransform(D,0,0,D,0,0)}
+size();addEventListener('resize',size);
+const PINK=['#ff4d88','#ff6f9f','#ff8fb3','#ffb0c8','#ff3d7f'];
+const MIX=PINK.concat(['#ffd166','#c9a7ff','#8ecae6','#ffb38a']);
+const rnd=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];
+let ps=[];
+const DRAG={heart:.965,conf:.94,dot:.95,rib:.94,star:.96},GRAV={heart:.05,conf:.08,dot:.06,rib:.07,star:.05};
+function kind(){const r=Math.random();return r<.45?'heart':r<.72?'conf':r<.82?'dot':r<.93?'rib':'star'}
+function mk(k){return{k,x:0,y:0,vx:0,vy:0,g:GRAV[k],d:DRAG[k],a:rnd(0,6.28),va:rnd(-.2,.2),ph:rnd(0,6.28),sw:rnd(.2,.8),age:0,ttl:5,al:1,
+ col:pick(k==='heart'?PINK:MIX),sz:k==='heart'?rnd(9,22):k==='conf'?rnd(6,11):k==='dot'?rnd(2,4.5):k==='rib'?rnd(26,46):rnd(6,12)}}
+function add(o){if(ps.length<700)ps.push(o)}
+function burst(x,y,n){const k=Math.min(1.3,Math.max(.75,Math.min(W,H*.8)/480));
+ for(let i=0;i<n;i++){const o=mk(kind()),an=-Math.PI/2+rnd(-.5,.5)*Math.PI*1.45,s=rnd(6,18)*k;
+  o.x=x;o.y=y;o.vx=Math.cos(an)*s;o.vy=Math.sin(an)*s;o.ttl=rnd(3.5,6);add(o)}}
+function drop(n){for(let i=0;i<n;i++){const o=mk(kind());o.x=rnd(0,W);o.y=rnd(-60,-10);o.vy=rnd(1.2,2.6);o.g=0;o.d=1;o.ttl=rnd(5,8);add(o)}}
+function floaty(){const o=mk(Math.random()<.8?'heart':'star');o.sz=rnd(6,13);o.x=rnd(0,W);o.y=H+20;o.vy=-rnd(.5,1.1);o.g=0;o.d=1;o.al=.35;o.ttl=20;o.sw=.4;add(o);return o}
+for(let i=0;i<12;i++)floaty().y=rnd(0,H);
+function heartP(s){ctx.beginPath();ctx.moveTo(0,s*.9);ctx.bezierCurveTo(-s*1.3,s*.1,-s*.9,-s*.95,0,-s*.35);ctx.bezierCurveTo(s*.9,-s*.95,s*1.3,s*.1,0,s*.9);ctx.closePath()}
+function starP(s){ctx.beginPath();ctx.moveTo(0,-s);ctx.quadraticCurveTo(0,0,s,0);ctx.quadraticCurveTo(0,0,0,s);ctx.quadraticCurveTo(0,0,-s,0);ctx.quadraticCurveTo(0,0,0,-s);ctx.closePath()}
+function draw(p){
+ const left=p.ttl-p.age;ctx.save();ctx.globalAlpha=p.al*Math.min(1,left,p.age*2+.3);ctx.translate(p.x,p.y);
+ ctx.fillStyle=p.col;ctx.strokeStyle=p.col;
+ if(p.k==='heart'){ctx.rotate(Math.sin(p.age*2+p.ph)*.35);heartP(p.sz);ctx.fill();
+  ctx.globalAlpha*=.5;ctx.fillStyle='#fff';ctx.beginPath();ctx.ellipse(-p.sz*.5,-p.sz*.3,p.sz*.22,p.sz*.12,-.6,0,6.3);ctx.fill()}
+ else if(p.k==='conf'){ctx.rotate(p.a);ctx.scale(1,Math.cos(p.age*6+p.ph));ctx.fillRect(-p.sz/2,-p.sz*.75,p.sz,p.sz*1.5)}
+ else if(p.k==='dot'){ctx.beginPath();ctx.arc(0,0,p.sz,0,6.3);ctx.fill()}
+ else if(p.k==='rib'){ctx.rotate(p.a);ctx.lineWidth=3;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-p.sz/2,0);ctx.quadraticCurveTo(0,Math.sin(p.age*8+p.ph)*p.sz*.35,p.sz/2,0);ctx.stroke()}
+ else{ctx.rotate(p.a*.3);const t=.7+.3*Math.sin(p.age*6+p.ph);starP(p.sz*t);ctx.fill()}
+ ctx.restore()}
+let last=performance.now(),acc=0;
+function loop(t){const dt=Math.min((t-last)/1000,.05);last=t;const f=dt*60;acc+=dt;if(acc>.55){acc=0;floaty()}
+ ctx.clearRect(0,0,W,H);
+ for(const p of ps){p.age+=dt;p.vx*=Math.pow(p.d,f);p.vy*=Math.pow(p.d,f);p.vy+=p.g*f;
+  p.x+=(p.vx+Math.sin(p.age*2.5+p.ph)*p.sw)*f;p.y+=p.vy*f;p.a+=p.va*f;draw(p)}
+ ps=ps.filter(p=>p.age<p.ttl&&p.y<H+50&&p.y>-80);
+ requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+
+const heart=document.getElementById('heart'),hint=document.getElementById('hint');
+let opened=false;
+function boing(){heart.classList.remove('boing');void heart.offsetWidth;heart.classList.add('boing')}
+heart.addEventListener('animationend',e=>{if(e.animationName==='boing')heart.classList.remove('boing')});
+function tap(){
+ try{navigator.vibrate&&navigator.vibrate([25,40,25])}catch(_){}
+ boing();const r=heart.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height*.4;
+ if(!opened){
+  opened=true;document.body.classList.add('open');hint.textContent='tap anywhere for more ♥';
+  setTimeout(()=>burst(cx,cy,95),180);setTimeout(()=>burst(cx,cy,65),480);setTimeout(()=>burst(cx,cy,50),800);
+  for(let i=0;i<7;i++)setTimeout(()=>burst(rnd(W*.1,W*.9),rnd(H*.35,H*.8),28),600+i*260);
+  let n=0;const iv=setInterval(()=>{drop(5);if(++n>26)clearInterval(iv)},200);
+ }else setTimeout(()=>burst(cx,cy,60),180);
+}
+let lt=0;
+['pointerup','touchend','click'].forEach(ev=>heart.addEventListener(ev,e=>{e.stopPropagation();const n=Date.now();if(n-lt<500)return;lt=n;tap()}));
+document.body.addEventListener('click',e=>{if(opened)burst(e.clientX,e.clientY,35)});
+</script>
+</body>
+</html>
